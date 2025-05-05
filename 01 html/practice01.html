@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table, th, td{
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    label{
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <h1>박서연</h1>
+  <p>
+    안녕하세요✋ <strong>프런트엔드 개발자</strong>를 지망하고 있어요.<br/>
+    MBTI는 <em>INTP</em>입니다.<br/>
+    잘 부탁드립니다.😀
+  </p>
+  <h2>관심사</h2>
+  <h3>좋아하는 음식</h3>
+  <ul>
+    <li><a target="_blank" href="https://map.naver.com/p/search/%EC%97%AC%EC%9D%98%EB%8F%84%20%EC%98%A4%EB%B3%B5%EC%88%98%EC%82%B0/place/1133140506?placePath=?entry=pll&from=nx&fromNxList=true&searchType=place">카이센동</a></li>
+    <li><a target="_blank" href="https://map.naver.com/p/entry/place/1972955139?lng=126.9265677&lat=37.5204236&placePath=%2FbookingDeliveryItem&entry=plt&searchType=place&c=15.00,0,0,0,dh">파스타</a></li>
+    <li><a target="_blank" href="https://map.naver.com/p/search/%EC%82%B0%ED%98%B8%ED%82%A4%20%EB%9D%BC%EB%A9%98/place/1087960334?c=15.00,0,0,2,dh&isCorrectAnswer=true">라멘</a></li>
+    <li><a target="_blank" href="https://map.naver.com/p/entry/place/35379094?lng=126.9168453&lat=37.5270428&placePath=%2Fhome&entry=plt&searchType=place&c=15.00,0,0,0,dh">간장게장</a></li>
+    <li><a target="_blank" href="https://map.naver.com/p/search/%EB%B8%8C%EB%A3%A8%ED%81%B4%EB%A6%B0%EB%B2%84%EA%B1%B0/place/37397540?c=15.00,0,0,0,dh&placePath=%3Fentry%253Dpll">햄버거</a></li>
+  </ul>
+  <h3>좋아하는 영화</h3>
+  <ul>
+    <li><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5_w_j-Lh7-xW29Idn9PUzs0nv6j_GVnY-0Q&s" alt="dune"></li>
+    <li><img src="https://upload.wikimedia.org/wikipedia/en/1/14/Tenet_movie_poster.jpg" alt="tenet"></li>
+    <li><img src="https://upload.wikimedia.org/wikipedia/en/f/fe/1917_%282019%29_Film_Poster.jpeg" alt="1917"></li>
+    <li><img src="https://upload.wikimedia.org/wikipedia/en/1/15/Dunkirk_Film_poster.jpg" alt="dunkirk"></li>
+    <li><img src="https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/Spider-Man_Into_the_Spider-Verse_poster.png/250px-Spider-Man_Into_the_Spider-Verse_poster.png" alt="spiderman_into_the_spider_verse"></li>
+  </ul>
+  <h3>기본 정보 입력</h3>
+  <form action="#" method="post">
+    <label for="name"> 이름
+      <input type="text" id="name" placeholder="이름을 입력하세요" name="name">
+    </label>
+    <label for="email">이메일
+      <input type="email" id="email" name="email" placeholder="이메일을 입력하세요">
+    </label>
+    <input type="submit" value="가입하기">
+  </form>
+  <h3>관심 분야 선택</h3>
+  <form action="#" method="post">
+    관심 분야:
+    <label for="html">
+      <input type="checkbox" id="html" name="interest" value="html"> HTML
+    </label>
+    <label for="css">
+      <input type="checkbox" id="css" name="interest" value="css"> CSS
+    </label>
+    <label for="javascript">
+      <input type="checkbox" id="javascript" name="interest" value="javascript"> JavaScript
+    </label>
+    성별:
+    <label for="male">
+      <input type="radio" id="male" name="gender" value="male"> 남자
+    </label>
+    <label for="female">
+      <input type="radio" id="female" name="gender" value="female"> 여자
+    </label>
+    <input type="submit" value="제출">
+  </form>
+</body>
+</html>
