@@ -22,6 +22,7 @@
 <br/>
 
 ## Git/Github 명령어
+![스크린샷 2025-05-05 220629](https://github.com/user-attachments/assets/66ad1950-5efe-4181-b9be-da710d6bcc96)
 ### push
 - `git init`
   - 현재 폴더를 Git 저장소로 초기화
