@@ -92,6 +92,7 @@ btn.addEventListener('click', function () {
 - ⚠️ `<script src="..."></script>`는 `body` 하단에 두는 것이 안전
 - 동기 / 지연 로딩 옵션: `defer`, `async`
   - 스크립트를 불러오는 방식을 제어하여 성능 최적화를 도와주는 속성
+
   |구분|`defer`|`async`|
   |---|---|---|
   |HTML 파싱|계속 진행됨|계속 진행됨|
@@ -102,7 +103,7 @@ btn.addEventListener('click', function () {
   - HTML 파싱
     - `<script src="...">`: HTML 파싱을 중단시키고 JS 파일을 다운로드 + 실행
     - `defer`, `async`: HTML 파싱을 중단하지 않고, 자바스크립트를 비동기적으로 다운로드 (비동기 로딩)
-  - `async` 많이 사용
+  - `defer` 많이 사용
   - 스크립트 실행 시점
     - `defer`: HTML 파싱이 끝난 후에 실행 ➡️ 항상 DOM을 안정적으로 다룰 수 있음
     - `async`: 스크립트 다운로드 완료 즉시 실행 ➡️ 네트워크가 빠르면 더 빨리 실행되어 DOM보다 먼저 실행될 가능성이 있음 
