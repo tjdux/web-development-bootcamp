@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
+    body{
+      font-family: "Song Myung", serif;
+    }
+
+    button{
+      font-family: inherit;
+    }
+    
+    div{
+      width: 200px;
+      height: 100px;
+      background-color: #9dc183;
+      margin-bottom: 10px;
+      transition: all 0.3s;
+      padding: 10px 20px;
+      box-sizing: border-box;
+    }
+
+    .highlight{
+      border: 3px solid crimson;
+    }
+
+    .rounded{
+      border-radius: 12px;
+    }
+
+    .dark{
+      background-color: #444c38;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="title">DOM 실습</h1>
+  <div id="box">박스</div>
+
+  <button onclick="toggleContent()">내용 토글</button>
+  <button onclick="toggleAttr()">속성 토글</button>
+  <button onclick="toggleStyle()">스타일 변경</button>
+  <button onclick="addClass()">클래스 추가</button>
+  <button onclick="removeClass()">클래스 제거</button>
+  <button onclick="toggleClass()">클래스 토글</button>
+  <button onclick="addElement()">요소 추가</button>
+  <button onclick="removeElement()">요소 삭제</button>
+
+  <script>
+    const title = document.getElementById("title");
+    const box = document.getElementById("box");
+
+    let contentToggled = false;
+    let attrToggled = false;
+    let addedElement = null;
+
+    // 1. 내용 토글 
+    function toggleContent(){
+      if (!contentToggled){
+        title.innerHTML = `<mark>DOM 변경 완료!</mark>`;
+        box.textContent = '텍스트만 출력 (textContent)'
+      } else {
+        title.textContent = 'DOM 실습';
+        box.textContent = '박스';
+      }
+      contentToggled = !contentToggled;
+    }
+
+    // 2. 속성 토글
+    function toggleAttr(){
+      if (!attrToggled){
+        box.setAttribute("title", "Peekaboo!")
+      } else {
+        box.removeAttribute('title');
+      }
+      attrToggled = !attrToggled;
+    }
+
+    // 3. 스타일 변경
+    function toggleStyle(){
+      box.style.backgroundColor =
+        box.style.backgroundColor === "orange" ? '#9dc183' : "orange";
+    }
+
+    // 4. 클래스 추가
+    function addClass(){
+      box.classList.add('highlight', 'rounded')
+    }
+
+    // 5. 클래스 제거
+    function removeClass(){
+      box.classList.remove('highlight', 'rounded', 'dark');
+    }
+
+    // 6. 클래스 토글
+    function toggleClass(){
+      box.classList.toggle('dark');
+    }
+
+    // 7. 요소 추가
+    function addElement(){
+      if (!addedElement){
+        addedElement = document.createElement('p');
+        addedElement.textContent = '새로운 요소 추가!';
+        document.body.appendChild(addedElement);
+      }
+    }
+
+    // 8. 요소 삭제
+    function removeElement(){
+      if (addedElement){
+        document.body.removeChild(addedElement);
+        addedElement = null;
+      }
+    }
+  </script>
+</body>
+</html>
