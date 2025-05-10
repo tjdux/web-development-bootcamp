@@ -1,0 +1,28 @@
+body {
+}
+
+/* .container {
+}
+
+.container .heroes {
+}
+
+.container .heroes .hero {
+}
+
+.container .heroes .hero:hover {
+}
+
+.container .heroes .hero .image {
+} */
+
+/* 로고 - 수정하지 않아도 됩니다. */
+.container .logo {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.container .logo img {
+  width: 100%;
+}
