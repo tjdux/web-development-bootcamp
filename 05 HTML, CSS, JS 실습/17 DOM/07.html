@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>방명록 만들기</title>
+  </head>
+  <body>
+    <h1>여기는 방명록!!</h1>
+    <form>
+      <label for="writer">작성자</label>
+      <input type="text" id="writer" autocomplete="off" />
+      <br />
+      <br />
+
+      <label for="content">내용</label>
+      <input type="text" id="content" style="width: 500px" autocomplete="off" />
+      <br />
+      <br />
+
+      <button type="button" onclick="writeNote();">등록</button>
+    </form>
+
+    <br />
+    <br />
+
+    <table id="table" border="1" cellpadding="10" cellspacing="1">
+      <tr>
+        <th>작성자</th>
+        <th>내용</th>
+        <th>작성일</th>
+      </tr>
+      <!-- 
+        코드 추가 예시
+        <tr>
+          <td>홍길동</td>
+          <td>하이</td>
+          <td>2022-10-05 12:34</td>
+        </tr>
+      -->
+    </table>
+
+    <script>
+      const writer = document.getElementById("writer");
+      const content = document.getElementById("content");
+      const table = document.getElementById("table");
+
+      function createTr(writer, content, date){
+        const tr = document.createElement("tr");
+        const arr = [writer, content, date];
+
+        for (let i = 0; i < arr.length; i++){
+          const td = document.createElement("td");
+          td.textContent = arr[i];
+          tr.appendChild(td);
+        }
+
+        return tr
+      }
+
+      function resetInput(){
+        writer.value = "";
+        content.value = "";
+      }
+
+
+
+      function writeNote() {
+        const writerVal = writer.value;
+        const contentVal = content.value;
+        const date = new Date().toLocaleString("ko-KR");
+
+        const tr = createTr(writerVal, contentVal, date);
+        table.appendChild(tr);
+
+        resetInput();
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>아이스크림 베스트 9</title>
+
+    <style>
+      p {
+        padding: 10px 20px;
+        background-color: rgb(248, 255, 230);
+        border-radius: 10px;
+      }
+
+      /* CSS */
+      .article-box {
+        display: inline-block;
+        margin: 10px;
+        padding: 30px;
+        border-radius: 20px;
+        background-color: rgb(255, 248, 248);
+        border: 1px solid rgb(250, 226, 231);
+      }
+
+      .img-box {
+        width: 180px;
+        height: 180px;
+        background-color: rgb(250, 226, 231);
+        border-radius: 50%;
+      }
+
+      .text-center {
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>HTML 요소 생성/추가하기</h1>
+    <!-- WARNING: HTML 코드 변경 금지!! -->
+    <h2 class="text-center">이달의 맛 BEST9</h2>
+    <section class="text-center">
+      <!-- 이 곳에 article 태그가 추가되도록! -->
+    </section>
+
+    <script>
+      const section = document.querySelector("section");
+      const icecreams = [
+        "내가 아인슈페너?!",
+        "엄마는 외계인",
+        "민트 초콜릿 칩",
+        "뉴욕 치즈케이크",
+        "아이스 초당옥수수",
+        "초콜릿 무스",
+        "체리쥬빌레",
+        "뮤! 넌 내거야",
+        "오레오 쿠키 앤 크림",
+      ];
+
+      for (let i = 0; i < icecreams.length; i++){
+        const title = document.createElement("h3");
+        title.textContent = `Top ${i+1}`;
+        title.classList.add("text-center");
+
+        const div = document.createElement("div");
+        div.textContent = icecreams[i];
+        div.classList.add("text-center");
+
+        const article = document.createElement("article");
+        article.classList.add("article-box");
+        article.appendChild(title);
+        article.appendChild(div);
+        
+        section.appendChild(article);
+      }
+    </script>
+  </body>
+</html>

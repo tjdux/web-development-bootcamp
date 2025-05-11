@@ -1,0 +1,14 @@
+div{
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+@media (max-width: 700px){
+  div{
+    background-color: aqua;
+    display: block;
+  }
+}
