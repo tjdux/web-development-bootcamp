@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+body{
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  background-color: rgb(208, 208, 208);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Noto Sans KR", sans-serif;;
+}
+
+.container{
+  background-color: white;
+  padding: 50px 20px;
+  box-sizing: border-box;
+  width: 475px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12), 
+            0 2px 2px rgba(0,0,0,0.12), 
+            0 4px 4px rgba(0,0,0,0.12), 
+            0 8px 8px rgba(0,0,0,0.12),
+          0 16px 16px rgba(0,0,0,0.12);
+}
+
+.title, 
+.msg,
+form{
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+.msg{
+  color: rgb(108, 108, 108);
+}
+
+input{
+  padding: 5px 10px;
+  outline: none;
+  font-family: inherit;
+}
+
+input[type="submit"]{
+  background-color: rgb(91, 91, 230);
+  color: white;
+  border: none;
+  border: 1px solid rgb(91, 91, 230);
+}
+
+input[type="submit"]:hover{
+  background-color: rgb(55, 55, 230);
+  cursor: pointer;
+}
