@@ -17,43 +17,43 @@ form{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 390px;
-  padding: 40px 20px;
+  width: 24.375rem;
+  padding: 2.5rem 1.25rem;
   box-sizing: border-box;
 }
 
 label{
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 0.625rem;
 }
 
 input, select{
   font-family: inherit;
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   box-sizing: content-box;
   outline: none;
-  height: 30px;
-  padding: 2px 10px;
+  height: 1.875rem;
+  padding: 0.125rem 0.625rem;
 }
 
 
 label[for="agree"]{
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 1.875rem;
 }
 
 input[type="checkbox"]{
   position: absolute;
-  top: -5px;
-  left: 90px;
+  top: -0.3125rem;
+  left: 5.625rem;
 }
 
 input[type="submit"]{
   border: none;
   background-color: rgb(40, 79, 41);
   color: white;
-  padding: 15px 30px;
-  height: 50px;
+  padding: 1rem 1.875rem;
+  height: 3.125rem;
   box-sizing: border-box;
 }
 
