@@ -4,6 +4,9 @@ const PORT = 3000;
 const usersRouter = require('./routers/users');
 const postRouter = require('./routers/posts')
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+
 app.use('/users', usersRouter);
 app.use('/posts', postRouter)
 

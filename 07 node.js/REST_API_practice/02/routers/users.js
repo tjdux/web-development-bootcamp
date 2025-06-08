@@ -3,9 +3,6 @@ const router = express.Router();
 
 const {users, posts} = require('../data/data.js')
 
-router.use(express.json());
-router.use(express.urlencoded({extended: true}))
-
 router.get('/', (req, res) => {
   res.send(users.map(user => ({"id": user})))
 })
