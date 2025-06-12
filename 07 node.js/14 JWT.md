@@ -28,15 +28,15 @@
     ```
   - 5️⃣ 이 토큰이 JWT 형식일 수도 있고 아닐 수도 있음
   - 6️⃣ 이 후 데이터 요청 시 다이어트 앱은 이 JWT를 Authorization 헤더에 넣어 카카오 API에 요청
+  ```http
+  GET /userinfo
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...
+  ```
   - 7️⃣ 카카오는 JWT 검증 (verify)을 거쳐 데이터 응답 
     ```javascript
     // JWT 검증
     jwt.verify(token, secretOrPrivateKey, [options, callback])
     ```
-  ```http
-  GET /userinfo
-  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6...
-  ```
 ### JWT 특징
 - 자체적으로 **서명을 포함하므로 위조 방지 가능**
 - Base64로 인코딩된 JSON이라 읽고 해석하기 쉬움
