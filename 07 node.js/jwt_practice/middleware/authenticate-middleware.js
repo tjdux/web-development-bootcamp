@@ -5,8 +5,6 @@ module.exports = function (req, res, next){
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1]
 
-  console.log(token)
-
   const verifiedToken = verifyToken(token);
 
   if (!verifiedToken){

@@ -25,9 +25,13 @@ module.exports = function (err, req, res, next) {
       return res.status(401).send({
         errorMessage: "로그인을 해주세요."
       })
-    case "NonExistingPost":
+    case "PostNotFound":
       return res.status(404).send({
         errorMessage: "존재하지 않는 포스트"
+      })
+    case "Forbidden":
+      return res.status(401).send({
+        errorMessage: "접근권한이 없습니다"
       })
     default:
       return res.status(500).send({

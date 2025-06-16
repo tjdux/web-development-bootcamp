@@ -1,4 +1,4 @@
-const { body, validationResult } = require('express-validator')
+const { body, validationResult, param, oneOf } = require('express-validator')
 
 exports.signUpValidator = [
   body('email')
@@ -20,6 +20,31 @@ exports.loginValidator = [
     .notEmpty().withMessage("비밀번호가 없습니다.")
 ]
 
+// 게시글 작성
+exports.postValidator = [
+  body('title')
+    .notEmpty().withMessage("제목이 없습니다."),
+  body('content')
+    .notEmpty().withMessage("내용이 없습니다.") 
+]
+
+// 특정 게시물 조회 (params 검증)
+exports.postIdValidator = [
+  param('postId')
+    .notEmpty().withMessage("postId가 없습니다.")
+    .isInt().withMessage("id가 숫자여야 합니다.")
+]
+
+// 게시글 수정
+exports.postUpdateValidator = [
+  ...this.postIdValidator,
+  oneOf([
+    body('title')
+      .notEmpty().withMessage("제목이 없습니다."),
+    body('content')
+      .notEmpty().withMessage("내용이 없습니다.")
+  ])
+]
 exports.handleValidationResult = (req, res, next) => {
   const result = validationResult(req).errors;
   if (result.length){
