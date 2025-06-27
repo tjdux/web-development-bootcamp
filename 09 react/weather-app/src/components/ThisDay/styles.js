@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ThisDayWrapper = styled.div`
   width: 100%;
   max-width: 450px;
-  min-height: 350px;
+  min-height: 300px;
   padding: 30px;
   background-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(20px);
@@ -42,14 +42,13 @@ export const Top = styled.div`
       margin: 0;
     }
   }
-
   img {
     width: 120px;
     height: 120px;
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
     transition: transform 0.3s ease;
     &:hover {
-      transform: scale() (1.1);
+      transform: scale(1.1);
     }
   }
 `;
