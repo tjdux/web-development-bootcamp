@@ -1,9 +1,9 @@
 import OpenWeather from "openweathermap-ts";
 
 const openWeather = new OpenWeather({
-  apiKey: import.meta.env.REACT_APP_API_KEY,
+  apiKey: import.meta.env.VITE_API_KEY,
 });
 
-openWeather.openUnits("metric");
+openWeather.setUnits("metric");
 
 export default openWeather;
