@@ -1,4 +1,5 @@
 import { ThisDayWrapper, Top, Bottom } from "./styles";
+import CurrentTime from "./CurrentTime";
 
 const ThisDay = () => {
   return (
@@ -11,7 +12,7 @@ const ThisDay = () => {
         <img src="./images/weatherIcons/rain.svg" />
       </Top>
       <Bottom>
-        <div>오후 11:11</div>
+        <CurrentTime />
         <div>Seoul-KR</div>
       </Bottom>
     </ThisDayWrapper>
