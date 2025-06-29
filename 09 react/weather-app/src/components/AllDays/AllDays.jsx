@@ -1,15 +1,15 @@
 import Day from "./Day";
 import { AllDaysWrapper } from "./styles";
+import useWeatherForecast from "../../utils/getWeatherForecast";
 
 const AllDays = () => {
+  const { days } = useWeatherForecast("Seoul");
+
   return (
     <AllDaysWrapper>
-      <Day />
-      <Day />
-      <Day />
-      <Day />
-      <Day />
-      <Day />
+      {days.map((day) => (
+        <Day key={day.date} day={day} />
+      ))}
     </AllDaysWrapper>
   );
 };
