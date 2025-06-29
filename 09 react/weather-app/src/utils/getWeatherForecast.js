@@ -1,5 +1,6 @@
 import openWeather from "./openWeather";
 import { useQuery } from "@tanstack/react-query";
+import { useMemo } from "react";
 
 const getWeatherForecast = (city = "Seoul") =>
   openWeather.getThreeHourForecastByCityName({
@@ -13,7 +14,7 @@ const useWeatherForecast = (city = "Seoul") => {
     queryFn: () => getWeatherForecast(city),
   });
 
-  const days = (() => {
+  const days = useMemo(() => {
     if (!data?.list) return [];
 
     const grouped = data.list.reduce((acc, forecast) => {
@@ -26,8 +27,7 @@ const useWeatherForecast = (city = "Seoul") => {
     }, {});
 
     return Object.values(grouped);
-  })();
-
+  }, [data]);
   console.log(days);
 
   return {
