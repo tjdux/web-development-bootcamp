@@ -28,7 +28,6 @@ const useWeatherForecast = (city = "Seoul") => {
 
     return Object.values(grouped);
   }, [data]);
-  console.log(days);
 
   return {
     ...rest,

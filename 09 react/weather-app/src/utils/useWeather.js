@@ -1,9 +1,9 @@
 import openWeather from "./openWeather";
 import { useQuery } from "@tanstack/react-query";
 
-const getWeather = function () {
+const getWeather = function (city) {
   const weather = openWeather.getCurrentWeatherByCityName({
-    cityName: "Seoul",
+    cityName: city,
     countryCode: "KR",
     units: "metrics",
   });

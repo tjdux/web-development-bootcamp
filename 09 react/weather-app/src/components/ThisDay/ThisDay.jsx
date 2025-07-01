@@ -2,9 +2,12 @@ import { ThisDayWrapper, Top, Bottom } from "./styles";
 import CurrentTime from "./CurrentTime";
 import useWeather from "../../utils/useWeather";
 import getWeatherIcon from "../../utils/getWeatherIcon";
+import { useParams } from "react-router-dom";
 
 const ThisDay = () => {
-  const { data, isLoading } = useWeather("Seoul");
+  const { id } = useParams();
+  console.log(id);
+  const { data, isLoading } = useWeather(id ? id : "Seoul");
   const weatherIconSrc = `./images/weatherIcons/${getWeatherIcon(
     data?.weather[0].main
   )}`;
