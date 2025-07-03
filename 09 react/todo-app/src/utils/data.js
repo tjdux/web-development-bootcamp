@@ -1,5 +1,5 @@
 // js/data.js
-export const todos = [
+export const initialTodos = [
   {
     id: 1,
     title: "HTML 기본 태그 복습",
@@ -182,7 +182,7 @@ export const todos = [
   },
 ];
 
-export const users = [
+export const initialUsers = [
   { email: "user1@example.com", password: "password123" },
   { email: "admin@example.com", password: "adminpass" },
   { email: "guest@example.com", password: "guest" },

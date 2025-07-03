@@ -19,6 +19,11 @@ function App() {
     localStorage.setItem("currentUser", JSON.stringify(userData));
   };
 
+  const onSignOut = function () {
+    localStorage.removeItem("currentUser");
+    setCurrentUser("");
+  };
+
   return (
     <BrowserRouter>
       <Routes>
@@ -26,7 +31,7 @@ function App() {
           path="/sign-in"
           element={<SignInPage onSignIn={onSignIn} currentUser={currentUser} />}
         />
-        <Route path="/todos" element={<TodosPage />} />
+        <Route path="/todos" element={<TodosPage onSignOut={onSignOut} />} />
         <Route
           path="*"
           element={<SignInPage onSignIn={onSignIn} currentUser={currentUser} />}

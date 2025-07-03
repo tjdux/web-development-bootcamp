@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { users } from "../../utils/data";
+import { initialUsers } from "../../utils/data";
 import { useNavigate } from "react-router-dom";
 
 function SignInPage({ onSignIn, currentUser }) {
@@ -28,7 +28,7 @@ function SignInPage({ onSignIn, currentUser }) {
       return;
     }
 
-    const foundUser = users.find(
+    const foundUser = initialUsers.find(
       (user) => user.email === email && user.password === password
     );
 
