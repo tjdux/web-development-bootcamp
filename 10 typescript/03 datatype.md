@@ -27,6 +27,7 @@ console.log(checkUserStatus(guestUserLoggedIn));
 - 일반적인 프로그래밍 언어에서는 정수 (integer)와 실수 (float/double)를 구분하여 다른 타입을 사용하지만, ts에서는 number 타입 하나로 이 모든 것을 처리
 - 심지어 2진수, 8진수, 16진수 리터럴까지도 number 타입으로 표현 가능
 - 모든 수치 연산에 사용되는 값은 "number" 타입으로 명시
+- 🎇 NaN, Infinity <- 숫자로 취급
 
 ```typescript
 function calculateDiscountPrice(
@@ -47,6 +48,10 @@ console.log(
 
 const hexValue: number = 0xff;
 console.log(hexValue);
+
+let num1: number = Infinity;
+let num2: number = -Infinity;
+let num3: number = NaN;
 ```
 
 ## string
@@ -94,6 +99,18 @@ console.log(`학생 평균 점수: ${averageGrade.toFixed(2)}점`);
 const fruits: string[] = ["사과", "바나나", "오렌지"];
 fruits.push("포도");
 console.log(fruits);
+
+// 제네릭 문법
+let boolArr: Array<boolean> = [true, false, true];
+
+// 배열에 들어가는 요소들의 타입이 다양한 경우
+let multiArr: (string | number)[] = [1, "hello"];
+
+// 다차원 배열
+let doubleArr: number[][] = [
+  [1, 2, 3],
+  [4, 5],
+];
 ```
 
 ## tuple
@@ -112,8 +129,18 @@ console.log(`이름: ${userInfo[0]}, 나이: ${userInfo[1]}, 활성: ${userInfo[
 // 🙅‍♀️
 //const userInfo: [string, number, boolean] = ["이순신", true, 35];
 
-// 원소를 새로 넣을 수는 있으나 ts의 본래 목적이 사라지므로 사용 지양
+// 원소를 새로 넣거나 뺄 수는 있으나 ts의 본래 목적이 사라지므로 사용 지양
 // userInfo.push();
+// userInfo.pop()
+
+// 튜플 유용한 경우
+const users: [string, number][] = [
+  ["이정환", 1],
+  ["이아무개", 2],
+  ["김아무개", 3],
+  ["박아무개", 4],
+  // [5, "최아무개"]
+];
 ```
 
 ## enum
@@ -126,12 +153,32 @@ console.log(`이름: ${userInfo[0]}, 나이: ${userInfo[1]}, 활성: ${userInfo[
 - 하지만 값의 수가 적거나, 값들 사이의 관계가 뚜렷하지 않으면 string 리터럴 유니온 타입 등을 고려하는 것이 더 나을 수 있음
 
 ```typescript
+// 문자형 enum
 enum UserRole {
   ADMIN = "ADMIN",
   EDITOR = "EDITOR",
   USER = "USER",
 }
 
+const user = {
+  name: "박서연",
+  role: UserRole.ADMIN,
+};
+
+const user2 = {
+  name: "홍길동",
+  role: UserRole.EDITOR,
+};
+
+const user3 = {
+  name: "아무개",
+  role: UserRole.USER,
+};
+
+console.log(user, user2, user3);
+// { name: '박서연', role: 'ADMIN' } { name: '홍길동', role: 'EDITOR' } { name: '아무개', role: 'USER' }
+
+// 숫자형 enum
 enum DayOfWeek {
   SUNDAY, // SUNDAY = 0
   MONDAY, // MONDAY = 1
@@ -141,8 +188,9 @@ enum DayOfWeek {
   FRIDAY, // FRIDAY = 5
   SATURDAY, // SATURDAY = 6
 }
+
 const today: DayOfWeek = DayOfWeek.MONDAY;
-console.log(`현재 요일: ${DayOfWeek[DayOfWeek.MONDAY]}`);
+console.log(`현재 요일: ${DayOfWeek[today]}`); //현재 요일: MONDAY
 ```
 
 ## readonly
@@ -195,7 +243,10 @@ console.log(flexibleValue);
 flexibleValue = { id: 1, type: "data" };
 console.log(flexibleValue);
 
+flexibleValue.toUpperCase(); //<- runtime error 발생
+
 // number는 any 안에 속해있는 타입
+// 모든 타입의 변수에 any 타입 변수 할당 가능
 let num: number = flexibleValue;
 console.log(num); // { id: 1, type: 'data' }
 ```
@@ -206,6 +257,24 @@ console.log(num); // { id: 1, type: 'data' }
 - any와는 다르게 더 안전한 방식으로 동작
 - unknown 타입의 변수에 할당된 값을 다른 특정 타입의 변수에 할당하거나, 그 값을 직접 사용하려면 명시적으로 타입이 무엇인지 확인
 - 즉, 사용하기 전에 반드시 타입 체크를 하도록 강제하도록 만듦
+
+```typescript
+let unknownVar: unknown;
+unknownVar = "";
+unknownVar = 1;
+unknownVar = () => {};
+
+// 🙅‍♀️
+// 모든 타입의 변수에 unknown 할당 불가능
+// num = unknownVar;
+
+// 🙅‍♀️
+//unknownVar.toUpperCase()
+
+if (typeof unknownVar === "number") {
+  num = unknownVar;
+}
+```
 
 ## union
 

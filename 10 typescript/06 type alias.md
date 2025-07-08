@@ -3,6 +3,7 @@
 - 기존 타입에 새로운 이름 (별칭)을 부여하는 데 사용
 - `type` 키워드를 사용하여 정의
 - 인터페이스와 달리 객체 타입 뿐만 아니라 원시 타입, 유니온 타입, 튜플, 함수 시그니처 등 거의 모든 ts 타입에 별칭 부여 가능
+- 같은 스코프에서 중복된 이름의 타입 별칭 불가
 - 특징
   - 모든 타입에 적용 가능
   - 복잡한 타입 단순화
@@ -10,6 +11,21 @@
   - 선언적 병합 불가
 
 ```typescript
+// 같은 스코프에서 중복된 이름의 타입 별칭 불가
+type User = {
+  id: number;
+  name: string;
+  nickname: string;
+  birth: string;
+  bio: string;
+  location: string;
+};
+
+function func() {
+  // 함수 스코프
+  type User = {};
+}
+
 // 1️⃣ 원시 타입에 별칭 부여
 type Age = number;
 type UserName = string;
