@@ -1,0 +1,12 @@
+{
+  "name": "library_app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "run": "tsc & node ./src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
