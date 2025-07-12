@@ -105,9 +105,7 @@ function returnBook(user: User, isbn: string) {
 
   const bookToRemove = libraryBooks.find((book) => book.isbn === isbn);
 
-  if (bookToRemove) {
-    bookToRemove.isAvailable = !bookToRemove?.isAvailable;
-  }
+  bookToRemove!.isAvailable = !bookToRemove!.isAvailable;
 }
 
 // 유저 생성
