@@ -25,6 +25,7 @@
 ### 기본 인터페이스 (객체 타입 정의)
 
 ```typescript
+// 1️⃣
 interface Product {
   id: number;
   name: string;
@@ -47,6 +48,25 @@ const keyBoard: Product = {
   description: "게이밍에 최적화된 키보드",
   createdAt: new Date(),
 };
+
+// 2️⃣
+interface Person {
+  readonly name: string;
+  age?: number;
+  sayHi(): void;
+  sayHi(a: number, b: number): void;
+}
+// 화살표 함수로 표현하면 오버로드 구현 불가
+
+const person: Person = {
+  name: "박서연",
+  sayHi() {
+    console.log("hi");
+  },
+};
+
+person.sayHi();
+person.sayHi(1, 2);
 ```
 
 ### 함수 타입 인터페이스
@@ -110,6 +130,7 @@ myDictionary["country"] = "대한민국";
 - 여러 인터페이스를 동시에 상속받는 것도 가능
 
 ```typescript
+// 1️⃣
 interface Shape {
   color: string;
 }
@@ -133,5 +154,85 @@ const myComplexCircle: ColoredCircleWithBorder = {
   radius: 10,
   borderWidth: 2,
   borderColor: "black",
+};
+
+// 2️⃣
+interface Animal {
+  name: string;
+  color: string;
+}
+
+interface Dog extends Animal {
+  isBark: boolean;
+}
+
+const dog: Dog = {
+  name: "",
+  color: "",
+  isBark: true,
+};
+
+interface Cat extends Animal {
+  isScratch: boolean;
+}
+
+const cat: Cat = {
+  name: "",
+  color: "",
+  isScratch: true,
+};
+
+interface Chicken extends Animal {
+  name: "chicken"; // 다시 정의하는 타입이 원본 타입의 서브타입이어야 함
+  isFly: boolean;
+}
+
+interface DogCat extends Dog, Cat {}
+
+const dogCat: DogCat = {
+  name: "",
+  color: "",
+  isBark: true,
+  isScratch: true,
+};
+```
+
+<br/>
+
+## 인터페이스 선언 합침 (declaration mergin)
+
+```ts
+interface Person {
+  name: string;
+}
+
+interface Person {
+  //name: number; <- 충돌
+  age: number;
+}
+
+interface Developer extends Person {
+  name: "hello";
+}
+
+const person: Person = {
+  name: "",
+  age: 27,
+};
+
+// 모듈 보강
+interface Lib {
+  a: number;
+  b: number;
+}
+
+interface Lib {
+  c: string;
+}
+
+const lib: Lib = {
+  a: 1,
+  b: 2,
+  c: "hello",
 };
 ```
