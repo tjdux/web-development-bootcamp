@@ -95,9 +95,9 @@ interface Bird {
   fly(): void;
 }
 
+// animal is Fish => 반환값이 true라면 animal은 Fish 타입
 function isFish(animal: Fish | Bird): animal is Fish {
   return (animal as Fish).swim !== undefined;
-  // Fish인 animal만 리턴
 }
 
 function move(animal: Fish | Bird) {
