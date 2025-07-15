@@ -33,6 +33,13 @@ class Coffee {
 
 const temp1 = new Coffee("에스프레소", 10);
 const temp2 = new Coffee("아메리카노", 1);
+
+// 🧼 클래스는 타입으로도 활용 가능
+const coffee: Coffee = {
+  coffeType: "",
+  shot: 1,
+  describe() {},
+};
 ```
 
 <br/>
@@ -81,6 +88,60 @@ test.deposit(10000);
 console.log(`입금 후: ${test.getBalance()}`);
 ```
 
+```ts
+class Employee {
+  private name: string;
+  protected age: number;
+  public position: string;
+
+  constructor(name: string, age: number, position: string) {
+    this.name = name;
+    this.age = age;
+    this.position = position;
+  }
+
+  work() {
+    console.log("work!");
+  }
+
+  introduce() {
+    console.log(`안녕하세요 ${this.name}입니다.`);
+  }
+}
+
+const employee = new Employee("박서연", 27, "developer");
+// 🙅‍♀️
+//employee.name = "홍길동";
+// employee.age = 20;
+employee.position = "designer";
+
+class ExecutiveOfficer extends Employee {
+  officeNumber: number;
+
+  constructor(
+    name: string,
+    age: number,
+    position: string,
+    officeNumber: number
+  ) {
+    super(name, age, position);
+    this.officeNumber = officeNumber;
+  }
+
+  // 🙅‍♀️ private은 파생클래스에서도 접근 불가
+  // func(){
+  //   this.name
+  // }
+
+  // 🙆‍♀️ protected는 파생클래스에서 접근 가능
+  func() {
+    this.age;
+  }
+}
+```
+
+<br/>
+
 ## 상속 (inheritance)
 
 - 코드 재사용을 위한 핵심 기능
@@ -92,6 +153,40 @@ console.log(`입금 후: ${test.getBalance()}`);
 - 오버라이딩: 부모 클래스에 정의되어 있는 메서드를 자식 클래스에서 같은 이름의 메서드로 재정의
 
 ```typescript
+// 1️⃣ 상속
+class Employee {
+  name: string;
+  age: number;
+  position: string;
+
+  constructor(name: string, age: number, position: string) {
+    this.name = name;
+    this.age = age;
+    this.position = position;
+  }
+
+  work() {
+    console.log("work!");
+  }
+}
+
+class ExecutiveOfficer extends Employee {
+  officeNumber: number;
+
+  constructor(
+    name: string,
+    age: number,
+    position: string,
+    officeNumber: number
+  ) {
+    super(name, age, position);
+    this.officeNumber = officeNumber;
+  }
+}
+```
+
+```ts
+// 2️⃣ 함수 오버라이딩
 class Vehicle {
   move() {
     console.log("이동 중...");
@@ -112,4 +207,28 @@ class Car extends Vehicle {
 
 const tesla = new ElectricCar();
 tesla.move();
+```
+
+<br/>
+
+## 인터페이스와 클래스
+
+```ts
+interface CharacterInterface {
+  name: string;
+  moveSpeed: number;
+  move(): void;
+}
+
+class Character implements CharacterInterface {
+  constructor(
+    public name: string,
+    public moveSpeed: number,
+    private extra: number
+  ) {}
+
+  move(): void {
+    console.log(`${this.moveSpeed} 속도로 이동!`);
+  }
+}
 ```
