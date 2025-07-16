@@ -56,3 +56,211 @@ let val3 = getLength({ length: 10 }); //10
 // 🙅‍♀️
 // let val4 = getLength(10);
 ```
+
+<br/>
+
+## `map`, `forEach` 메서드 구현
+
+### `map`
+
+```ts
+function map<T, U>(arr: T[], callback: (item: T) => U) {
+  const res = [];
+  for (let i = 0; i < arr.length; i++) {
+    res.push(callback(arr[i]));
+  }
+
+  return res;
+}
+
+map(arr, (val) => val * 2); //(parameter) val: number
+map(["hi", "hello"], (val) => val.toUpperCase()); //(parameter) val: string
+map(["hi", "hello"], (val) => parseInt(val));
+```
+
+### `forEach`
+
+```ts
+function forEach<T>(arr: T[], callback: (item: T) => void) {
+  for (let i = 0; i < arr.length; i++) {
+    callback(arr[i]);
+  }
+}
+
+forEach(arr2, (val) => console.log(val.toFixed())); //(parameter) val: number
+forEach(["123", "456"], (val) => val); //(parameter) val: string
+```
+
+<br/>
+
+## 제네릭 인터페이스
+
+```ts
+interface KeyPair<K, V> {
+  key: K;
+  value: V;
+}
+
+// 🌠 타입 변수에 할당할 타입을 함께 명시!
+let keyPair: KeyPair<string, number> = {
+  key: "key",
+  value: 0,
+};
+
+let keyPair2: KeyPair<boolean, string[]> = {
+  key: true,
+  value: ["1"],
+};
+
+// 인덱스 시그니처 + 제네릭 인터페이스
+interface Map<V> {
+  [key: string]: V;
+}
+
+let stringMap: Map<string> = {
+  key: "value",
+};
+
+let booleanMap: Map<boolean> = {
+  key: true,
+};
+```
+
+```ts
+// 💡 제네릭 인터페이스 활용 예시
+interface Student {
+  type: "student";
+  school: string;
+}
+
+interface Developer {
+  type: "developer";
+  skill: string;
+}
+
+interface User<T> {
+  name: string;
+  profile: T;
+}
+
+// 학생만 쓸 수 있는 함수
+function goToSchool(user: User<Student>) {
+  user.profile; //(property) User<Student>.profile: Student
+
+  const school = user.profile.school;
+  console.log(`${school}로 등교 완료!`);
+}
+
+const developerUser: User<Developer> = {
+  name: "박서연",
+  profile: {
+    type: "developer",
+    skill: "typescript",
+  },
+};
+
+const studentUser: User<Student> = {
+  name: "홍길동",
+  profile: {
+    type: "student",
+    school: "hufs",
+  },
+};
+
+goToSchool(studentUser);
+// 🙅‍♀️
+// goToSchool(developerUser);
+```
+
+<br/>
+
+## 제네릭 타입 별칭
+
+```ts
+type Map<V> = {
+  [key: string]: V;
+};
+
+let stringMap: Map<string> = {
+  key: "hello",
+};
+```
+
+<br/>
+
+## 제네릭 클래스
+
+```ts
+class List<T> {
+  constructor(public List: T[]) {}
+
+  push(data: T) {
+    this.List.push(data);
+  }
+
+  pop() {
+    return this.List.pop();
+  }
+
+  print() {
+    console.log(this.List);
+  }
+}
+const numberList = new List([1, 2, 3]);
+numberList.pop();
+numberList.push(4);
+numberList.print(); //[ 1, 2, 4 ]
+
+const stringList = new List(["1", "2"]);
+stringList.pop();
+stringList.push("4");
+stringList.print(); // [ '1', '4' ]
+```
+
+<br/>
+
+## 제네릭과 프로미스
+
+- 비동기 처리 성공 시의 결과 값의 타입을 명시
+
+```ts
+const promise = new Promise<number>((resolve, reject) => {
+  setTimeOut(() => {
+    resolve(20);
+    //reject("실패!")
+  }, 3000);
+});
+
+promise.then((response) => {
+  console.log(response * 10); //(parameter) response: number
+});
+
+promise.reject((err) => {
+  if (typeof err === "string") {
+    console.log(err);
+  }
+});
+```
+
+```ts
+// 프로미스를 반환하는 함수
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+}
+
+function fetchPost(): Promise<Post> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve({
+        id: 1,
+        title: "게시물 제목",
+        content: "게시물 내용",
+      });
+    }, 3000);
+  });
+}
+
+const postRequest = fetchPost();
+```
