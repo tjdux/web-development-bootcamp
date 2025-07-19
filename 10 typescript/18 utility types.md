@@ -1,11 +1,16 @@
 ## 유틸리티 타입 (utility types)
 
 - 기존 타입을 기반으로 새로운 타입을 쉽게 생성하고 변환할 수 있도록 돕는 강력한 기능
+- 제너릭, 맵드 타입, 조건부 타입 등의 타입 조작 기능을 이용해 실무에서 자주 사용하는 타입을 미리 만들어 놓은 것
 - 이를 통해 코드의 재사용성을 높이고 타입 추론을 더욱 효과적으로 활용할 수 있음
 
-### `Partial<T>` 타입
+<br/>
 
-- 타입 T의 모든 속성을 선택적으로 만듦
+## mapped 기반 유틸리티 타입
+
+### `Partial<T>`
+
+- 특정 객체 타입의 모든 프로퍼티를 선택적 프로퍼티로 변환
 - 해당 타입의 객체를 생성할 때 일부 또는 모든 속성을 생략할 수 있게 해줌
 - 보통은 객체의 일부 속성만 업데이트하거나, 특정 필드가 필수가 아닌 경우 사용
 
@@ -43,9 +48,13 @@ const updatedProduct2 = updateProduct(originalProduct, {
 });
 ```
 
-### `Required<T>` 타입
+```ts
+type Partial<T> = { [key in keyof T]?: T[key] };
+```
 
-- `Partial<T>`과는 반대로, 타입 T의 모든 속성을 필수적으로 만듦
+### `Required<T>`
+
+- `Partial<T>`과는 반대로, 특정 객체 타입의 의 모든 속성을 필수 프로퍼티로 만듦
 
 ```ts
 interface UserProfile {
@@ -73,9 +82,13 @@ const newUser: CompleteUserProfile = {
 // };
 ```
 
-### `Readonly<T>` 타입
+```ts
+type Required<T> = { [key in keyof T]-?: T[key] };
+```
 
-- 타입 T의 모든 속성을 읽기 전용 (readonly)로 만듦
+### `Readonly<T>`
+
+- 특정 객테 타입의 모든 속성을 읽기 전용 (readonly)로 만듦
 - 한 번 할당된 속성 값은 이후에 변경 불가능
 
 ```ts
@@ -95,9 +108,13 @@ const immutablePoint: ImmutablePoint = { x: 30, y: 40 };
 //immutablePoint.x = 35;
 ```
 
-### `Pick<T, K>` 타입
+```ts
+type Readonly<T> = { readonly [key in keyof T]: T[key] };
+```
 
-- 타입 T에서 K에 해당하는 속성들만 선택하여 새로운 타입
+### `Pick<T, K>`
+
+- 객체 타입 T에서 K에 해당하는 속성들만 선택하여 새로운 타입
 - 여기서 K는 T의 속성 이름들의 유니온 타입
 
 ```ts
@@ -125,9 +142,13 @@ console.log(customerInfo); //{ firstName: 'Alice', lastName: 'Smith' }
 // };
 ```
 
-### `Omit<T, K>` 타입
+```ts
+type Pick<T, K extends keyof T> = { [key in keyof K]: T[key] };
+```
 
-- `Pick<T, K>`과는 반대로, 타입 T에서 K에 해당하는 속성들만 제외하여 새로운 타입을 만듦
+### `Omit<T, K>`
+
+- `Pick<T, K>`과는 반대로, 객체 타입 T에서 K에 해당하는 속성들만 제외하여 새로운 타입을 만듦
 - 기존 타입에서 불필요한 속성들을 제거하여 새로운 타입을 정의할 때 사용
 
 ```ts
@@ -148,4 +169,96 @@ const publicInfo: PublicEmployeeInfo = {
 };
 console.log(publicInfo);
 // { id: 'EMP001', name: 'Charlie Brown', department: 'Marketing' }
+```
+
+```ts
+type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+// T = Employee, K = "salary" | "hireDate"
+// 1️⃣ Pick<Employee, Exclude<keyof Employee, "salary" | "hireDate">>
+// 2️⃣ Pick<Employee, Exclude<"id" | "name" | "department"|"salary"|"hireDate", "salary" | "hireDate">>
+// 3️⃣ Pick<Employee, "id" | "name" | "department">
+```
+
+### `Record<K, V>`
+
+```ts
+type ThumbnailLegacy = {
+  large: { url: string };
+  medium: { url: string };
+  small: { url: string };
+};
+
+type Thumbnail = Record<"large" | "medium" | "small", { url: string }>;
+// type Thumbnail = {
+//     large: {
+//         url: string;
+//     };
+//     medium: {
+//         url: string;
+//     };
+//     small: {
+//         url: string;
+//     };
+// }
+```
+
+```ts
+type Record<K extends keyof any, V> = { [key in K]: V };
+```
+
+<br/>
+
+## 조건부 타입 기반 유틸리티 타입
+
+### `Exclude<T, U>`
+
+- T에서 U를 제거하는 타입
+
+```ts
+type A = Exclude<string | boolean, boolean>;
+// type A = string
+```
+
+```ts
+type Exclude<T, U> = T extends U ? never : T;
+// 1️⃣ Exclude <string, boolean> | Exclude<boolean , boolean>
+// 2️⃣ string | never
+// 3️⃣ string
+```
+
+### `Extract<T, U>`
+
+- T에서 U를 추출하는 타입
+
+```ts
+type B = Extract<string | boolean, boolean>;
+// type B = boolean;
+```
+
+```ts
+type Extract<T, U> = T extends U ? T : never;
+```
+
+### `ReturnType<T>`
+
+- 함수의 반환값 타입을 추출하는 타입
+
+```TS
+function funcA() {
+  return "hello";
+}
+
+function funcB() {
+  return 10;
+}
+
+type ReturnA = ReturnType<typeof funcA>;
+//type ReturnA = string
+
+type ReturnB = ReturnType<typeof funcB>;
+// type ReturnB = number
+```
+
+```TS
+type ReturnType<T extends (...arg: any) => any> = T extends (...arg: any) => infer R ? R : never
 ```
